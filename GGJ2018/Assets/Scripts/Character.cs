@@ -7,7 +7,7 @@ public class Character : MonoBehaviour
     Animator anim;
     Rigidbody rb;
     public float jumpForce,horSpeed;
-    bool isJumping = false;
+    int isJumping = 0;
     public  void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -25,15 +25,31 @@ public class Character : MonoBehaviour
         
         rb.velocity = new Vector3(hor, rb.velocity.y,0);
 
-        if (Input.GetButtonDown("Jump"))
+
+        if (Input.GetButtonDown("Jump") && isJumping < 2) 
         {
+            isJumping ++;
+            Vector3 tempVel = rb.velocity;
+            tempVel.y = 0;
+            rb.velocity = tempVel;
             rb.AddForce(0,jumpForce,0);
         }
     }
 
     void OnCollisionEnter(Collision col)
     {
+        if (col.gameObject.layer == 8)
+        {
+            isJumping = 0;
+        }
 
-        
+    }
+    void OnCollisionExit(Collision col)
+    {
+        if (col.gameObject.layer == 8)
+        {
+            
+        }
+
     }
 }
