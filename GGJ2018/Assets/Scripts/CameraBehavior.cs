@@ -6,6 +6,7 @@ public class CameraBehavior : MonoBehaviour {
     Transform target=null;
     public float speed;
     Vector3 pos;
+    public float posY;
     
 	void Awake () {
         enabled = false;
@@ -15,7 +16,7 @@ public class CameraBehavior : MonoBehaviour {
 
 	void LateUpdate () {
         pos = target.position;
-        // pos.y = 15;
+        pos.y = posY;
         transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * speed);
 	}   
 }

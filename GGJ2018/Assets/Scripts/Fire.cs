@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour {
 
+    public float fireSpeed;
 	// Use this for initialization
 	void Start () {
 		
@@ -11,7 +12,7 @@ public class Fire : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position += transform.forward * 50 * Time.deltaTime;
+        transform.position += transform.forward * fireSpeed * Time.deltaTime;
 	}
 
     void OnCollisionEnter(Collision col)

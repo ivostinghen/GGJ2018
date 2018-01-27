@@ -7,8 +7,9 @@ public class Attack : MonoBehaviour {
     public GameObject firePrefab;
     public Transform fireSpawner;
 
-    public void Fire()
+    public void Shoot()
     {
         Instantiate(firePrefab, fireSpawner.position, fireSpawner.rotation);
     }
+
 }

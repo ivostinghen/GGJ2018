@@ -23,7 +23,7 @@ public class Character : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            attack.Fire();
+            attack.Shoot();
         }
         ///TODO: PUNCH
     }
