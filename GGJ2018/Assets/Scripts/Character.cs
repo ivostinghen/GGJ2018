@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     Animator anim;
+    public Attack attack;
     Rigidbody rb;
     public float jumpForce,horSpeed;
     int isJumping = 0;
@@ -16,12 +17,39 @@ public class Character : MonoBehaviour
     public void Update(){
 
         Move();
+        CheckAttack();
+    }
+    public void CheckAttack()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            attack.Fire();
+        }
+        ///TODO: PUNCH
+    }
+    void Flip(string side)
+    {
+        if(side == "left")
+        {
+            transform.localScale = Vector3.one;
+        }
+        else
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     public void Move()
     {
         float hor = Input.GetAxis("Horizontal") * horSpeed;
-        
+        if (hor < 0)
+        {
+            Flip("right");
+        }
+        else if (hor > 0)
+        {
+            Flip("left");
+        }
         
         rb.velocity = new Vector3(hor, rb.velocity.y,0);
 
