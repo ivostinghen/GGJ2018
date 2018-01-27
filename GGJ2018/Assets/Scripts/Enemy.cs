@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     Attack attack;
     Transform character;
     Coroutine cor;
+
     void Start()
     {
         character = GameObject.Find("Character").transform;

@@ -9,14 +9,15 @@ public class CameraBehavior : MonoBehaviour {
     public float posY;
     
 	void Awake () {
+        pos = transform.position;
         enabled = false;
         target = GameObject.Find("Target").transform;
         if (target != null) enabled = true;
     }
 
 	void LateUpdate () {
-        pos = target.position;
-        pos.y = posY;
+        pos.x = target.position.x;
+        //pos.y = posY;
         transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * speed);
-	}   
+    }   
 }

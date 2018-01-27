@@ -8,7 +8,7 @@ public class Ice : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        transform.LookAt(GameObject.Find("Character").transform) ;
+        transform.LookAt(GameObject.Find("EnemyTarget").transform) ;
     }
 
     // Update is called once per frame

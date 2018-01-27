@@ -9,11 +9,19 @@ public class Character : MonoBehaviour
     Rigidbody rb;
     public float jumpForce,horSpeed;
     int isJumping = 0;
+    
     public  void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponentInChildren<Animator>();
     }
 
+
+    public void LateUpdate()
+    {
+        anim.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+      
+    }
     public void Update(){
 
         Move();
@@ -56,6 +64,7 @@ public class Character : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isJumping < 2) 
         {
+            anim.SetTrigger("jump");
             isJumping ++;
             Vector3 tempVel = rb.velocity;
             tempVel.y = 0;
