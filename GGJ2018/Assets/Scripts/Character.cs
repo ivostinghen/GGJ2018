@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Character : MonoBehaviour
 {
     Animator anim;
@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
     Rigidbody rb;
     public float jumpForce,horSpeed;
     int isJumping = 0;
-    
+    bool isDead = false;
     public  void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,7 +23,7 @@ public class Character : MonoBehaviour
       
     }
     public void Update(){
-
+        if (isDead) return;
         Move();
         CheckAttack();
     }
@@ -75,12 +75,28 @@ public class Character : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
+
         if (col.gameObject.layer == 8)
         {
             isJumping = 0;
         }
+        else if (col.gameObject.layer == 11 || col.gameObject.layer == 12)
+        {
+            StartCoroutine(Kill());
+
+        }
 
     }
+
+    IEnumerator Kill()
+    {
+        rb.isKinematic = false;
+        isDead = true;
+        anim.SetTrigger("death");
+        yield return new WaitForSeconds(4);
+        SceneManager.LoadScene(1);
+    }
+
     void OnCollisionExit(Collision col)
     {
         if (col.gameObject.layer == 8)

@@ -37,7 +37,7 @@ ModelImporter:
     4300006: pTorus1
     7400000: Walk
     7400002: Attack
-    7400004: Take 001
+    7400004: Death
     9500000: //RootNode
     13700000: pCylinder1
     13700002: pCylinder2
@@ -132,7 +132,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Take 001
+      name: Death
       takeName: Take 001
       firstFrame: 95
       lastFrame: 115

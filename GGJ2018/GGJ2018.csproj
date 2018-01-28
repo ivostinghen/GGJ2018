@@ -225,7 +225,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\DisableCamera.cs" />
+    <Compile Include="Assets\3D\alavanca+portao\ativa_portao.cs" />
     <Compile Include="Assets\Scripts\Attack.cs" />
     <Compile Include="Assets\Scripts\CameraBehavior.cs" />
     <Compile Include="Assets\Scripts\CameraShake\PeriodicShake.cs" />
@@ -234,9 +234,11 @@
     <Compile Include="Assets\Scripts\CameraShake\Util_Easing.cs" />
     <Compile Include="Assets\Scripts\CameraShake\Util_Noise.cs" />
     <Compile Include="Assets\Scripts\Character.cs" />
+    <Compile Include="Assets\Scripts\DisableCamera.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\Fire.cs" />
     <Compile Include="Assets\Scripts\Ice.cs" />
+    <Compile Include="Assets\Scripts\MenuController.cs" />
     <Compile Include="Assets\Scripts\PerlinShake.cs" />
     <Compile Include="Assets\Scripts\Platform.cs" />
     <Compile Include="Assets\Scripts\Stalactite.cs" />

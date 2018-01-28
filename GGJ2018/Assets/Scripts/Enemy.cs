@@ -11,8 +11,11 @@ public class Enemy : MonoBehaviour
     public float jumpForce;
     Attack attack;
     Transform character;
-    Coroutine cor;
+    Coroutine cor,corDeath;
     Animator anim;
+    bool dead = false;
+
+
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -30,13 +33,14 @@ public class Enemy : MonoBehaviour
         
         yield return new WaitForSeconds(.2F);
         anim.SetTrigger("attack");
-        yield return new WaitForSeconds(.4F);
+        yield return new WaitForSeconds(.2F);
         attack.Shoot();
         cor = null;
     }
 
     void LateUpdate()
     {
+        if (dead == true) return;
         float dist = Vector3.Distance(this.gameObject.transform.position, character.position);
 
         if (dist < 10)
@@ -44,9 +48,6 @@ public class Enemy : MonoBehaviour
             if (cor == null) cor = StartCoroutine(ShootDelayed());
             side = Mathf.Sign(character.position.x - this.transform.position.x);
             Flip();
-
-
-            //transform.LookAt(character.transform);
         }
         else if (cor == null)
         {
@@ -61,7 +62,7 @@ public class Enemy : MonoBehaviour
     {
         isChanging = true;
         side = side * -1;
-        print("change");
+
         Flip();
         yield return new WaitForSeconds(1);
         isChanging = false;
@@ -74,6 +75,30 @@ public class Enemy : MonoBehaviour
             if (isChanging == false) StartCoroutine(ChangePath());
         }
     }
+
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.layer == 13)
+        {
+
+            if(corDeath==null) corDeath = StartCoroutine(Die());
+        }
+    }
+    IEnumerator Die()
+    {
+        dead = true;
+        if(cor!=null)StopCoroutine(cor);
+
+        anim.SetTrigger("death");
+        yield return new WaitForSeconds(.8F);
+        //GetComponent<Rigidbody>().isKinematic = true;
+        gameObject.layer =14;
+        GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(10);
+        Destroy(this.gameObject);
+    }
+
 
     void Flip()
     {
