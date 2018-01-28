@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class Stalactite : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    Coroutine cor;
 
     void OnTriggerEnter(Collider col)
     {
         if(col.gameObject.layer == 10)
         {
-            GetComponent<Rigidbody>().isKinematic = false;
+            
+            if(cor==null)cor= StartCoroutine(Destroy());
         }
+    }
+    IEnumerator Destroy()
+    {
+        GetComponent<Rigidbody>().isKinematic = false;
+        yield return new WaitForSeconds(1F);
+        Destroy(this.gameObject);
     }
 }
