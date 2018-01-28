@@ -12,9 +12,10 @@ public class Enemy : MonoBehaviour
     Attack attack;
     Transform character;
     Coroutine cor;
-
+    Animator anim;
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         character = GameObject.Find("Character").transform;
         attack = GetComponent<Attack>();
     }
@@ -22,11 +23,14 @@ public class Enemy : MonoBehaviour
     IEnumerator ShootDelayed()
     {
         yield return new WaitForSeconds(Random.Range(.6F, 1.2F));
-        if (Random.Range(0, 3) == 2)
+        if (Random.Range(0, 3) != 2)
         {
             GetComponent<Rigidbody>().AddForce(0, jumpForce, 0); ;
         }
+        
         yield return new WaitForSeconds(.2F);
+        anim.SetTrigger("attack");
+        yield return new WaitForSeconds(.4F);
         attack.Shoot();
         cor = null;
     }
@@ -57,8 +61,9 @@ public class Enemy : MonoBehaviour
     {
         isChanging = true;
         side = side * -1;
+        print("change");
         Flip();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         isChanging = false;
     }
 
